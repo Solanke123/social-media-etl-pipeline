@@ -1,0 +1,27 @@
+SOCIAL MEDIA ETL PIPELINE - ARCHITECTURE
+
+  social_media_posts.json
+          |
+          v
+  wait_for_json (FileSensor)
+          |
+          v
+  validate_and_transform (PythonOperator)  -->  social_media_posts.tsv
+          |
+          +--------------------+---------------------+
+          v                    v                     v
+  load_raw_json_to_hdfs  load_raw_media_to_hdfs  load_processed_tsv_to_hdfs
+   /social_media/raw      /social_media/media     /social_media/processed
+          |                    |                     |
+          +--------------------+---------------------+
+                               v
+                    create_hive_table  (external table, database social_media_dw)
+                               |
+                               v
+                    create_analytics_table  (user engagement)
+                               |
+                               v
+                    generate_report  -->  reports/social_media_analytics.txt
+
+Components: Airflow (orchestration), HDFS (storage), Hive (SQL analytics), Python (validation).
+Hive metastore: embedded Derby (single process at a time).

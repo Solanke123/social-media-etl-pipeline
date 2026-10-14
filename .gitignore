@@ -1,0 +1,25 @@
+# Python / virtual environments
+__pycache__/
+*.pyc
+airflow-venv/
+venv/
+.venv/
+
+# Airflow runtime files
+logs/
+airflow.db
+airflow.cfg
+*.generated
+
+# Hive / Derby local metastore
+metastore_db/
+hive_metastore_db/
+derby.log
+
+# Secrets and logs
+.env
+*.log
+
+# Generated output
+data/processed/*.tsv
+reports/*.txt
