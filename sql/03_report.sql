@@ -1,5 +1,6 @@
 -- Queries used by the report task.
 SET hive.cli.print.header=true;
+SET hive.resultset.use.unique.column.names=false;
 USE social_media_dw;
 
 SELECT * FROM user_engagement_analytics ORDER BY engagement_score DESC;
